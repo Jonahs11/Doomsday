@@ -13,11 +13,12 @@ import { defineComponent } from "vue";
 export default defineComponent({
     name: "AnswerButton",
     props: {
-        day: String
+        day: String,
+        numerical_day: Number
     },
     methods: {
         answer_clicked: function() {
-            this.$emit("clicked", this.day);   
+            this.$emit("clicked", this.numerical_day);   
         }
     }
 })

@@ -3,16 +3,19 @@
   <div v-if="show_begin_button">
   <BeginButtonVue @begin-clicked="toggle_begin"> </BeginButtonVue>
   </div>
-  
+  <div v-if="show_days">
   <DateComp/>
+  </div>
+  
+
+
+
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
 import DateComp from './components/Date.vue';
 import BeginButtonVue from './components/BeginButton.vue';
-
 export default defineComponent({
   name: 'App',
   components: {
@@ -21,13 +24,18 @@ export default defineComponent({
   },
   data() {
     return {
-    show_begin_button: true
+    show_begin_button: true,
+    show_days: false
     }
     
+  },
+  mounted() {
+    console.log("This is the mounted function");
   },
   methods: {
     toggle_begin: function() {
       this.show_begin_button = !this.show_begin_button;
+      this.show_days = !this.show_days;
     }
   }
 });

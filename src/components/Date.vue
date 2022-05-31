@@ -17,16 +17,19 @@
 
 <div class="flex-parent jc-center">
 
-    <AnswerButtonVue day=0 @clicked="check_answer"></AnswerButtonVue>
-    <AnswerButtonVue day=1 @clicked="check_answer"></AnswerButtonVue>
-    <AnswerButtonVue day=2 @clicked="check_answer"></AnswerButtonVue>
-    <AnswerButtonVue day=3 @clicked="check_answer"></AnswerButtonVue>
-    <AnswerButtonVue day=4 @clicked="check_answer"></AnswerButtonVue>
-    <AnswerButtonVue day=5 @clicked="check_answer"></AnswerButtonVue>
-    <AnswerButtonVue day=6 @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Monday" :numerical_day="0" @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Tuesday" :numerical_day="1" @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Wednesday" :numerical_day=2 @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Thursday" :numerical_day="3" @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Friday" :numerical_day="4" @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Saturday" :numerical_day="5" @clicked="check_answer"></AnswerButtonVue>
+    <AnswerButtonVue day="Sunday" :numerical_day="6" @clicked="check_answer"></AnswerButtonVue>
 
 </div>
  <NewDateButton @new-date="create_date"> </NewDateButton>
+</div>
+<div>
+    <CorrectCounterVue v-bind:counter="correct_in_row"> </CorrectCounterVue>
 </div>
 
 </template>
@@ -38,16 +41,13 @@ import ShowDayButton from "./ShowDayButton.vue";
 import ShowDayButtonVue from "./ShowDayButton.vue";
 import NewDateButton from "./NewDateButton.vue";
 import AnswerButtonVue from "./AnswerButton.vue";
-
+import CorrectCounterVue from "./CorrectCounter.vue";
 
 export default defineComponent( {
     name: "DateComp",
-    props: {
-        written_date: String
-    },
     components: { 
         // ShowDayButton, 
-        NewDateButton, AnswerButtonVue},
+        NewDateButton, AnswerButtonVue, CorrectCounterVue},
     methods: {
         show_day: function() {
             // console.log("button has been clicked");
@@ -146,20 +146,28 @@ export default defineComponent( {
 
         correct_answer: function() {
             console.log("Correct answer chosen");
+            this.correct_in_row++;
+            this.create_date()
         },
 
         incorrect_answer: function() {
             console.log("Incorrect answer chosen");
-            
+            this.correct_in_row = 0;
+
         }
 
+    },
+    mounted() {
+        console.log("mounted function for Date called");
+        this.create_date();
     },
     data() {
         return {
             day : 11,
             month : 8,
             year : 2000,
-            date : ""
+            date : "",
+            correct_in_row: 0
         }
     }
 });
