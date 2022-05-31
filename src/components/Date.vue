@@ -1,7 +1,18 @@
 <template>
 <div class="date">
- <h1> {{ written_date }} </h1>
+ <h1> {{ date }}
+ </h1>
  <ShowDayButton @clicked="show_day"> </ShowDayButton>
+ <div class="flex"> 
+     <AnswerButtonVue day=0 @clicked="check_answer"></AnswerButtonVue>
+     <AnswerButtonVue day=1 @clicked="check_answer"></AnswerButtonVue>
+     <AnswerButtonVue day=2 @clicked="check_answer"></AnswerButtonVue>
+     <AnswerButtonVue day=3 @clicked="check_answer"></AnswerButtonVue>
+     <AnswerButtonVue day=4 @clicked="check_answer"></AnswerButtonVue>
+     <AnswerButtonVue day=5 @clicked="check_answer"></AnswerButtonVue>
+     <AnswerButtonVue day=6 @clicked="check_answer"></AnswerButtonVue>
+
+ </div>
  <NewDateButton @new-date="create_date"> </NewDateButton>
 
 </div>
@@ -13,6 +24,7 @@ import { defineComponent, toHandlers } from "vue";
 import ShowDayButton from "./ShowDayButton.vue";
 import ShowDayButtonVue from "./ShowDayButton.vue";
 import NewDateButton from "./NewDateButton.vue";
+import AnswerButtonVue from "./AnswerButton.vue";
 
 
 export default defineComponent( {
@@ -20,7 +32,7 @@ export default defineComponent( {
     props: {
         written_date: String
     },
-    components: { ShowDayButton, NewDateButton },
+    components: { ShowDayButton, NewDateButton, AnswerButtonVue},
     methods: {
         show_day: function() {
             console.log("button has been clicked");
@@ -48,13 +60,14 @@ export default defineComponent( {
             else if (days_30.has(this.month)) upper = 30;
             this.day = this.randint(1, 30);
 
-
-            console.log(this.month.toString() + "/" + this.day.toString());
-
+            this.date = this.month.toString() + "/" + this.day.toString() + "/" + this.year.toString();
         },
         randint: function(lower: number, upper: number) {
             let rand: number = (Math.floor(Math.random() * (upper - lower + 1))) + lower;
             return rand;
+        },
+        check_answer: function(day: number) {
+            console.log(day);
         }
     },
     data() {
@@ -67,9 +80,13 @@ export default defineComponent( {
     }
 });
 
-// let day: number = 11
-// let month: number = 08
-// let year: number = 2000
-
-
 </script>
+
+
+<style scoped>
+.flex {
+    display: flex
+}
+
+
+</style>
