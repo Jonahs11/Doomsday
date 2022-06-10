@@ -1,7 +1,7 @@
 <template>
 
 <div class="beginbutton">
-    <button class="button" @click="clicked">Begin Guessing</button>
+    <button class="button" @click="clicked"> Practice Guessing </button>
 </div>
 
 </template>

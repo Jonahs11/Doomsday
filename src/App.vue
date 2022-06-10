@@ -1,10 +1,11 @@
 <template>
  <h1> Welcome to Weekday Guesser!</h1>
-  <div v-if="show_begin_button">
-  <BeginButtonVue @begin-clicked="toggle_begin"> </BeginButtonVue>
+  <div v-if="show_home">
+  <BeginButtonVue @begin-clicked="begin_practice"> </BeginButtonVue>
+  <button @click="begin_challenge"> Challenge </button>
   </div>
-  <div v-if="show_days">
-  <DateComp/>
+  <div v-if="show_practice">
+  <DateComp @go_home="show_homescreen"> </DateComp>
   </div>
   
 
@@ -24,8 +25,9 @@ export default defineComponent({
   },
   data() {
     return {
-    show_begin_button: true,
-    show_days: false
+    show_home: true,
+    show_practice: false,
+    show_challenge: false,
     }
     
   },
@@ -33,9 +35,22 @@ export default defineComponent({
     console.log("This is the mounted function");
   },
   methods: {
-    toggle_begin: function() {
-      this.show_begin_button = !this.show_begin_button;
-      this.show_days = !this.show_days;
+
+    show_homescreen: function() {
+      this.show_home = true;
+      this.show_practice = false;
+      this.show_challenge = false;
+    },
+
+    begin_practice: function() {
+      this.show_home = false; 
+      this.show_practice = true;
+      console.log("toggle screens");
+
+    },
+    begin_challenge: function() {
+      this.show_challenge = true;
+      this.show_home = false;
     }
   }
 });

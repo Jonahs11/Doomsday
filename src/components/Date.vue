@@ -2,18 +2,10 @@
 <div class="date">
  <h1> {{ date }}
  </h1>
- <!-- <ShowDayButton @clicked="show_day"> </ShowDayButton> -->
- <!-- <div class="flex"> 
-    <AnswerButtonVue day=0 @clicked="check_answer"></AnswerButtonVue>
-     <AnswerButtonVue day=1 @clicked="check_answer"></AnswerButtonVue>
-     <AnswerButtonVue day=2 @clicked="check_answer"></AnswerButtonVue>
-     <AnswerButtonVue day=3 @clicked="check_answer"></AnswerButtonVue>
-     <AnswerButtonVue day=4 @clicked="check_answer"></AnswerButtonVue>
-     <AnswerButtonVue day=5 @clicked="check_answer"></AnswerButtonVue>
-     <AnswerButtonVue day=6 @clicked="check_answer"></AnswerButtonVue>
 
-
- </div> -->
+    <div> 
+        <button @click="back_home"> Back</button>
+    </div>
 
 <div class="flex-parent jc-center">
 
@@ -129,7 +121,15 @@ export default defineComponent( {
             else if (days_30.has(this.month)) upper = 30;
             this.day = this.randint(1, 30);
 
-            this.date = this.month.toString() + "/" + this.day.toString() + "/" + this.year.toString();
+            this.date  = this.month.toString() + "/" + this.day.toString() + "/20";
+            if (this.year > 9) {
+                this.date = this.date + this.year.toString();
+            }
+            else {
+                this.date = this.date + "0" + this.year.toString();
+            }
+
+
         },
         randint: function(lower: number, upper: number) {
             let rand: number = (Math.floor(Math.random() * (upper - lower + 1))) + lower;
@@ -154,6 +154,10 @@ export default defineComponent( {
             console.log("Incorrect answer chosen");
             this.correct_in_row = 0;
 
+        },
+        back_home: function() {
+            this.$emit("go_home");
+            console.log("go_home back clicked");
         }
 
     },
