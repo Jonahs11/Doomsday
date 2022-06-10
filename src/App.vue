@@ -1,11 +1,16 @@
 <template>
- <h1> Welcome to Weekday Guesser!</h1>
+
+ <h1 v-if="show_home"> Welcome to Weekday Guesser!</h1>
   <div v-if="show_home">
   <BeginButtonVue @begin-clicked="begin_practice"> </BeginButtonVue>
-  <button @click="begin_challenge"> Challenge </button>
+  
+  <button class="button" @click="begin_challenge"> Challenge </button>
   </div>
   <div v-if="show_practice">
   <PracticeComp @go-home="show_homescreen"> </PracticeComp>
+  </div>
+  <div v-if="show_challenge"> 
+  <ChallengeComp @go-home="show_homescreen"> </ChallengeComp>
   </div>
   
 
@@ -18,12 +23,14 @@ import { defineComponent } from 'vue';
 // import DateComp from './components/Date.vue';
 import BeginButtonVue from './components/BeginButton.vue';
 import PracticeComp from './components/Practice.vue';
+import ChallengeComp from "./components/Challenge.vue";
 export default defineComponent({
   name: 'App',
   components: {
     BeginButtonVue,
     // DateComp,
-    PracticeComp
+    PracticeComp,
+    ChallengeComp
 },
   data() {
     return {
@@ -67,4 +74,12 @@ export default defineComponent({
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.button {
+    background-color: red;
+    text-align: center;
+    font-size: 16px;
+}
+
+
 </style>

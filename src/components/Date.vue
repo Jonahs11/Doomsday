@@ -37,7 +37,6 @@ export default defineComponent( {
         },
     methods: {
         show_day: function() {
-            // console.log("button has been clicked");
 
             let days_30 = new Set();
             days_30.add(3);
@@ -143,7 +142,7 @@ export default defineComponent( {
             console.log("Correct answer chosen");
             this.$emit("correct-answer");
             // this.correct_in_row++;
-            this.create_date()
+            this.create_date();
         },
 
         incorrect_answer: function() {
