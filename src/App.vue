@@ -5,7 +5,7 @@
   <button @click="begin_challenge"> Challenge </button>
   </div>
   <div v-if="show_practice">
-  <DateComp @go_home="show_homescreen"> </DateComp>
+  <PracticeComp @go-home="show_homescreen"> </PracticeComp>
   </div>
   
 
@@ -15,14 +15,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import DateComp from './components/Date.vue';
+// import DateComp from './components/Date.vue';
 import BeginButtonVue from './components/BeginButton.vue';
+import PracticeComp from './components/Practice.vue';
 export default defineComponent({
   name: 'App',
   components: {
     BeginButtonVue,
-    DateComp
-  },
+    // DateComp,
+    PracticeComp
+},
   data() {
     return {
     show_home: true,

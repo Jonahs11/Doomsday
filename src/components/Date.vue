@@ -3,10 +3,6 @@
  <h1> {{ date }}
  </h1>
 
-    <div> 
-        <button @click="back_home"> Back</button>
-    </div>
-
 <div class="flex-parent jc-center">
 
     <AnswerButtonVue day="Monday" :numerical_day="0" @clicked="check_answer"></AnswerButtonVue>
@@ -20,26 +16,25 @@
 </div>
  <NewDateButton @new-date="create_date"> </NewDateButton>
 </div>
-<div>
+<!-- <div>
     <CorrectCounterVue v-bind:counter="correct_in_row"> </CorrectCounterVue>
-</div>
+</div> -->
 
 </template>
 
 
 <script lang="ts">
 import { defineComponent, toHandlers } from "vue";
-import ShowDayButton from "./ShowDayButton.vue";
-import ShowDayButtonVue from "./ShowDayButton.vue";
 import NewDateButton from "./NewDateButton.vue";
 import AnswerButtonVue from "./AnswerButton.vue";
-import CorrectCounterVue from "./CorrectCounter.vue";
+// import CorrectCounterVue from "./CorrectCounter.vue";
 
 export default defineComponent( {
     name: "DateComp",
     components: { 
-        // ShowDayButton, 
-        NewDateButton, AnswerButtonVue, CorrectCounterVue},
+        NewDateButton, AnswerButtonVue
+        // , CorrectCounterVue
+        },
     methods: {
         show_day: function() {
             // console.log("button has been clicked");
@@ -146,18 +141,16 @@ export default defineComponent( {
 
         correct_answer: function() {
             console.log("Correct answer chosen");
-            this.correct_in_row++;
+            this.$emit("correct-answer");
+            // this.correct_in_row++;
             this.create_date()
         },
 
         incorrect_answer: function() {
+            this.$emit("incorrect-answer");
             console.log("Incorrect answer chosen");
-            this.correct_in_row = 0;
+            // this.correct_in_row = 0;
 
-        },
-        back_home: function() {
-            this.$emit("go_home");
-            console.log("go_home back clicked");
         }
 
     },
